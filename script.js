@@ -243,15 +243,16 @@ console.log( agesArr1 === agesArr3 )
 
 
 // clonar array
+// => forma 1
 // let arrayCopy = agesArr1.slice(0) // ref XYZW
 
 // JSON.stringify()
 // JSON.parse()
 
-console.log( JSON.stringify(agesArr1) )
-console.log( JSON.parse( "[40, 100, 1000, 2000]" ) )
+console.log( JSON.stringify(agesArr1) ) // convierte un elemento de JS en un string (incluyendo todos los caracteres especiales)
+console.log( JSON.parse( "[40, 100, 1000, 2000]" ) ) // convierte un string en eun elemento de JS, tomando en cuenta los caracteres especiales para crear arrays, objetos
 
-
+// => forma 2
 let arrayCopy = JSON.parse(  JSON.stringify(agesArr1)  )
 
 arrayCopy.pop()
@@ -261,3 +262,202 @@ console.log(arrayCopy)
 console.log(agesArr1)
 
 
+
+// Funciones
+
+function nombreDeLaFuncion( /*  parametros opcionales */ ) {
+
+  // el codigo que se ejecutará cada vez que llame, invoke, encienda la funcion.
+
+  // si tenemos parametros, haremos uso de los parametros
+
+  return /* algun valor */
+  // opcionalmente, la funciona retornará un valor necesario fuera de la función.
+
+}
+
+
+// para invocarla, llamarla, encenderla...
+nombreDeLaFuncion( /* argumentos opcionales que se relacionan con los parametros */ )
+
+
+// ejemplo de funcion
+
+function printName( name, number ) {
+  // let name = "Jorge" // esto es lo que ocurre en JS detras de camaras
+
+  // console.log("Hola Jorge")
+  console.log( `hola ${name}. El numero es ${number}` )
+
+  // console.log( `Hola ${name}`.repeat(number) )
+
+}
+
+printName( "Jorge", 5 )
+
+// ....
+
+printName( "Santi", 10 )
+printName( "Lorena", 20 )
+printName( "Cristina", 18 )
+// printName( 4, "Javier")
+
+
+// return
+
+
+function addNumbers( num1, num2 ) {
+
+  // let sum = num1 + num2
+  // console.log(sum)
+
+  return num1 + num2
+
+  // la funcion SOLO puede retornar un valor
+  
+  // despues de que el return se ejecute, la funcion se detiene
+  let algo = "patata"
+  console.log(algo)
+
+}
+
+let result1 = addNumbers( 5, 18 ) // 23
+let result2 = addNumbers( 100, 24 ) // 124
+
+console.log( "fuera de la funcion: ", result1, result2 )
+
+
+// ejemplo más complejo
+
+const staffList = ["caro", "ruth", "clara"]
+
+// console.log( `nuestro maravilloso staff esta comprendido por: ${staffList[0]}, ${staffList[1]} y ${staffList[2]} ` )
+
+function capitalize( string ) {
+
+  let capitalizedStr = string[0].toUpperCase() + string.slice(1)
+  return capitalizedStr
+
+  // en una sola linea
+  // return string[0].toUpperCase() + string.slice(1)
+
+}
+
+let name1 = capitalize( staffList[0] );
+let name2 = capitalize( staffList[1] );
+let name3 = capitalize( staffList[2] );
+
+console.log( `nuestro maravilloso staff esta comprendido por: ${name1}, ${name2} y ${name3} ` )
+
+// sin usar variables name1, name2, name3
+// console.log( `nuestro maravilloso staff esta comprendido por: ${capitalize( staffList[0] )}, ${capitalize( staffList[1])} y ${capitalize( staffList[2])} ` )
+
+
+// Diferentes tipos de funciones
+
+
+// funcion de declaración. ES5-. PRACTIQUEN ESTA.
+
+function funcionDeDeclaracion(  ) {
+  return "Esto es una función de declaración"
+} 
+
+// funcion de expresión. ES6+
+
+// la menos usada de todas.
+const funcionDeExpresion = function(  ) {
+  return "Esto es una función de expresión"
+}
+
+// función de flecha. PRACTIQUEN ESTA.
+const funcionDeFlecha = (  ) => {
+  return "Esto es una función de flecha"
+}
+
+
+// función de flecha reducida
+const funcionDeFlechaReducida = (  ) => "Esto es una función de flecha"
+
+
+
+
+// Actividad guiada
+
+// Crear una funcion sinEspacio que elimine todos los espacios vacios de un string.
+
+// "ba na na ra    ma   "
+// => "bananarama"
+
+function sinEspacios( string ) {
+
+  // clausula de guardia
+  if ( typeof string !== "string" ) {
+    // detener la funcion
+    return "ERROORRRR El valor recibido no es el correcto, por favor usa solo strings"
+  }
+
+
+  let cleanString = "";
+
+  for ( let character of string ) {
+
+    // console.log(character)
+    if ( character !== " " ) {
+      // console.log(character)
+      cleanString += character
+    }
+
+  }
+
+  // console.log(cleanString)
+  return cleanString;
+}
+
+
+// tests
+console.log( sinEspacios( "ba na na ra    ma   " ) )
+console.log( sinEspacios( "HO %// LAA  " ) )
+console.log( sinEspacios( "" ) )
+console.log( sinEspacios( 55 ) ) // test de un error
+
+
+
+// Actividad 2 guiada
+
+// crear una funcion que reciba:
+// 1. recibe un unico vegetal
+// 2. recibe un array de vegetales
+
+// nos dice cuantas veces está el vegetal en el array
+
+// "tomate"
+// ["tomate", "lechuga", "zanahoria", "tomate", "patata", "tomate", "patata"] 
+// el resultado deberia ser: 3
+
+function findVeggie( searchVeggie, veggieArray ) {
+
+  let counter = 0;
+
+  for ( let i = 0; i < veggieArray.length; i++ ) {
+
+    // console.log( veggieArray[i] )
+    if (veggieArray[i] === searchVeggie) {
+      // console.log("hay tomate")
+      counter++
+    }
+
+  }
+
+  // console.log(counter)
+  if (counter === 0) {
+    return `no hay ${searchVeggie} en el array`
+  } else {
+    return `hay ${counter} de ${searchVeggie} en el array`
+  }
+
+}
+
+// test
+let someArr = ["tomate", "lechuga", "zanahoria", "tomate", "patata", "tomate", "patata"] 
+
+console.log( findVeggie( "banana", someArr ) )
